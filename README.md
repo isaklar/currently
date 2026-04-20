@@ -1,78 +1,78 @@
 # ⚡ Currently
 
-En Next.js-applikation som visar dagens elpriser för alla svenska elprisområden (SE1–SE4) med Server-Side Rendering.
+A Next.js application that displays today's electricity prices for all Swedish pricing zones (SE1–SE4) with Server-Side Rendering.
 
-## Funktioner
+## Features
 
-- 🔴 Realtidspriser per timme för SE1, SE2, SE3 och SE4
-- 📈 Interaktivt prisdiagram per zon (24h)
-- 🟢/🟡/🔴 Prisnivåindikator (lågt / medel / högt) baserat på dagens spann
-- 🔄 Data hämtas server-side och cacheas i 1 timme (ISR)
-- 📱 Responsiv design
+- 🔴 Real-time hourly prices for SE1, SE2, SE3, and SE4
+- 📈 Interactive price chart per zone (24h)
+- 🟢/🟡/🔴 Price level indicator (low / medium / high) based on the daily range
+- 🔄 Server-side data fetching with 1-hour cache (ISR)
+- 📱 Responsive design
 
-## Beroenden
+## Dependencies
 
-| Paket | Version | Syfte |
-|-------|---------|-------|
-| `next` | 14+ | React-ramverk med App Router & SSR |
-| `react` | 18+ | UI-bibliotek |
-| `typescript` | 5+ | Statisk typning |
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `next` | 14+ | React framework with App Router & SSR |
+| `react` | 18+ | UI library |
+| `typescript` | 5+ | Static typing |
 | `tailwindcss` | 3+ | Utility-first CSS |
-| `recharts` | 2+ | Prisdiagram (AreaChart) |
-| `date-fns` | 3+ | Datumformatering |
-| `lucide-react` | latest | Ikoner |
+| `recharts` | 2+ | Price chart (AreaChart) |
+| `date-fns` | 3+ | Date formatting |
+| `lucide-react` | latest | Icons |
 
-## Komma igång
+## Getting Started
 
-### Förutsättningar
+### Prerequisites
 
-- Node.js 18.17 eller senare
-- npm, yarn eller pnpm
+- Node.js 18.17 or later
+- npm, yarn, or pnpm
 
 ### Installation
 
 ```bash
-# Klona repot
+# Clone the repo
 git clone <repo-url>
 cd currently
 
-# Installera beroenden
+# Install dependencies
 npm install
 
-# Starta utvecklingsservern
+# Start the development server
 npm run dev
 ```
 
-Öppna [http://localhost:3000](http://localhost:3000) i din webbläsare.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Bygga för produktion
+### Build for Production
 
 ```bash
 npm run build
 npm start
 ```
 
-## Datakälla
+## Data Source
 
-Elpriserna hämtas från [elprisetjustnu.se](https://www.elprisetjustnu.se) — ett gratis, öppet API utan autentisering.
+Electricity prices are fetched from [elprisetjustnu.se](https://www.elprisetjustnu.se) — a free, open API with no authentication required.
 
-API-anrop: `https://www.elprisetjustnu.se/api/v1/prices/{år}/{månad}-{dag}_{zon}.json`
+API call: `https://www.elprisetjustnu.se/api/v1/prices/{year}/{month}-{day}_{zone}.json`
 
-## Arkitektur
+## Architecture
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx       # Root layout med metadata
-│   └── page.tsx         # Server Component – hämtar data för alla zoner parallellt
+│   ├── layout.tsx       # Root layout with metadata
+│   └── page.tsx         # Server Component – fetches data for all zones in parallel
 ├── components/
-│   ├── Header.tsx        # Sidans rubrik med datum
-│   └── ZoneCard.tsx      # Klient-komponent med prisdiagram per zon
+│   ├── Header.tsx        # Page header with date
+│   └── ZoneCard.tsx      # Client component with price chart per zone
 └── lib/
-    └── electricity.ts    # API-funktioner och datatyper
+    └── electricity.ts    # API functions and data types
 ```
 
-## Miljövariabler
+## Environment Variables
 
-Inga miljövariabler krävs – API:et är öppet.
+No environment variables required — the API is open and public.
 
