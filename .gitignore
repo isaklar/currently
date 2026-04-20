@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI/Copilot instruction files
+CLAUDE.md
+AGENTS.md
+.copilot/
+.github/copilot-instructions.md
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# secrets & credentials
+*.key
+*.cert
+*.secret

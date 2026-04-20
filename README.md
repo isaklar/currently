@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Currently
 
-## Getting Started
+En Next.js-applikation som visar dagens elpriser för alla svenska elprisområden (SE1–SE4) med Server-Side Rendering.
 
-First, run the development server:
+## Funktioner
+
+- 🔴 Realtidspriser per timme för SE1, SE2, SE3 och SE4
+- 📈 Interaktivt prisdiagram per zon (24h)
+- 🟢/🟡/🔴 Prisnivåindikator (lågt / medel / högt) baserat på dagens spann
+- 🔄 Data hämtas server-side och cacheas i 1 timme (ISR)
+- 📱 Responsiv design
+
+## Beroenden
+
+| Paket | Version | Syfte |
+|-------|---------|-------|
+| `next` | 14+ | React-ramverk med App Router & SSR |
+| `react` | 18+ | UI-bibliotek |
+| `typescript` | 5+ | Statisk typning |
+| `tailwindcss` | 3+ | Utility-first CSS |
+| `recharts` | 2+ | Prisdiagram (AreaChart) |
+| `date-fns` | 3+ | Datumformatering |
+| `lucide-react` | latest | Ikoner |
+
+## Komma igång
+
+### Förutsättningar
+
+- Node.js 18.17 eller senare
+- npm, yarn eller pnpm
+
+### Installation
 
 ```bash
+# Klona repot
+git clone <repo-url>
+cd currently
+
+# Installera beroenden
+npm install
+
+# Starta utvecklingsservern
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Öppna [http://localhost:3000](http://localhost:3000) i din webbläsare.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Bygga för produktion
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Datakälla
 
-To learn more about Next.js, take a look at the following resources:
+Elpriserna hämtas från [elprisetjustnu.se](https://www.elprisetjustnu.se) — ett gratis, öppet API utan autentisering.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+API-anrop: `https://www.elprisetjustnu.se/api/v1/prices/{år}/{månad}-{dag}_{zon}.json`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Arkitektur
 
-## Deploy on Vercel
+```
+src/
+├── app/
+│   ├── layout.tsx       # Root layout med metadata
+│   └── page.tsx         # Server Component – hämtar data för alla zoner parallellt
+├── components/
+│   ├── Header.tsx        # Sidans rubrik med datum
+│   └── ZoneCard.tsx      # Klient-komponent med prisdiagram per zon
+└── lib/
+    └── electricity.ts    # API-funktioner och datatyper
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Miljövariabler
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Inga miljövariabler krävs – API:et är öppet.
+
